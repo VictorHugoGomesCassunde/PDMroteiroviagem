@@ -13,27 +13,36 @@
 </head>
 
 <body>
+<div class="container">
+
     <h1>Roteiro de Viagem</h1>
 
-    <label>Nome:</label>
-    <input id="nome" type="text"><br/>
+    
+    <div class="card">
+        <label>Nome:</label>
+        <input id="nome" type="text">
 
-    <label>Latitude:</label>
-    <input id="lat" type="text"><br/>
+        <label>Latitude:</label>
+        <input id="lat" type="text">
 
-    <label>Longitude:</label>
-    <input id="lng" type="text"><br/>
+        <label>Longitude:</label>
+        <input id="lng" type="text">
 
-    <button id="btnCapturar">Capturar Localização</button>
-    <button id="btnSalvar">Salvar Local</button>
+        <button id="btnCapturar">Capturar Localização</button>
+        <button id="btnSalvar">Salvar Local</button>
+        <button id="btnAdicionar">Adicionar no mapa</button>
+    </div>
 
-    <button id="btnAdicionar">Adicionar no mapa</button>
+    
+    <div class="card">
+        <h2>Locais salvos</h2>
+        <ul id="lista"></ul>
 
-    <h2>Locais salvos</h2>
-    <ul id="lista"></ul>
+        <div id="mapa"></div>
+    </div>
 
-    <div id="mapa"></div>
+</div>
 
-    <script type="module" src="./js/main.js"></script>
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>
