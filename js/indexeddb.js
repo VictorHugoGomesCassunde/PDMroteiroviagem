@@ -5,20 +5,16 @@ const STORE_NAME = "locais";
 function abrirBanco() {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open(DB_NAME, DB_VERSION);
-
         request.onupgradeneeded = () => {
             const db = request.result;
             if (!db.objectStoreNames.contains(STORE_NAME)) {
                 db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
             }
         };
-
         request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error);
     });
 }
-
-// Salvar
 export async function salvarLocal(nome, lat, lng, criadoEm) {
     const db = await abrirBanco();
     return new Promise((resolve, reject) => {
@@ -33,8 +29,6 @@ export async function salvarLocal(nome, lat, lng, criadoEm) {
         request.onerror = () => reject(request.error);
     });
 }
-
-// Listar
 export async function listarLocais() {
     const db = await abrirBanco();
     return new Promise((resolve, reject) => {
@@ -47,8 +41,6 @@ export async function listarLocais() {
         request.onerror = () => reject(request.error);
     });
 }
-
-// Remover
 export async function removerLocal(id) {
     const db = await abrirBanco();
     return new Promise((resolve, reject) => {

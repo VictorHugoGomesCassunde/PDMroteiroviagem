@@ -1,36 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWA Geolocalização</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Roteiro de Viagem - GeoPWA</title>
 
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
-<body>
 
-    <h1>Geolocalização + IndexedDB</h1>
+<body>
+    <h1>Roteiro de Viagem</h1>
+
+    <label>Nome:</label>
+    <input id="nome" type="text"><br/>
+
+    <label>Latitude:</label>
+    <input id="lat" type="text"><br/>
+
+    <label>Longitude:</label>
+    <input id="lng" type="text"><br/>
 
     <button id="btnCapturar">Capturar Localização</button>
+    <button id="btnSalvar">Salvar Local</button>
+    <button id="btnAdicionar">Adicionar no mapa</button>
 
-    <div>
-        <input type="text" id="nome" placeholder="Nome do local">
-        <input type="text" id="lat" placeholder="Latitude">
-        <input type="text" id="lng" placeholder="Longitude">
-        <button id="btnSalvar">Salvar</button>
-    </div>
-
-    <h2>Locais Salvos</h2>
+    <h2>Locais salvos</h2>
     <ul id="lista"></ul>
 
     <div id="mapa"></div>
 
-    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>

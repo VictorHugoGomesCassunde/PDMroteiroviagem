@@ -2,6 +2,7 @@ import { salvarLocal, listarLocais, removerLocal } from "./indexeddb.js";
 
 const btnCapturar = document.getElementById("btnCapturar");
 const btnSalvar = document.getElementById("btnSalvar");
+const btnAdicionar = document.getElementById("btnAdicionar"); // NOVO
 const nomeInput = document.getElementById("nome");
 const latInput = document.getElementById("lat");
 const lngInput = document.getElementById("lng");
@@ -9,10 +10,6 @@ const listaEl = document.getElementById("lista");
 
 let mapa;
 let camadaMarcadores;
-
-// ==============================
-// Iniciar mapa
-// ==============================
 function iniciarMapa() {
     mapa = L.map('mapa').setView([-23.5, -46.6], 5);
     camadaMarcadores = L.layerGroup().addTo(mapa);
@@ -21,10 +18,6 @@ function iniciarMapa() {
         attribution: '© OpenStreetMap'
     }).addTo(mapa);
 }
-
-// ==============================
-// Capturar GPS
-// ==============================
 const sucesso = (pos) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
@@ -43,10 +36,6 @@ btnCapturar.addEventListener("click", () => {
     if (!navigator.geolocation) return alert("Navegador não suporta geolocalização.");
     navigator.geolocation.getCurrentPosition(sucesso, erro);
 });
-
-// ==============================
-// Salvar dados
-// ==============================
 btnSalvar.addEventListener("click", async () => {
     const nome = nomeInput.value.trim();
     const lat = Number(latInput.value.trim());
@@ -59,10 +48,25 @@ btnSalvar.addEventListener("click", async () => {
     nomeInput.value = "";
     carregarLista();
 });
+btnAdicionar.addEventListener("click", () => {
+    const lat = Number(latInput.value.trim());
+    const lng = Number(lngInput.value.trim());
+    const nome = nomeInput.value.trim() || "Local manual";
 
-// ==============================
-// Carregar locais salvos
-// ==============================
+    if (!lat || !lng) {
+        alert("Informe latitude e longitude válidas.");
+        return;
+    }
+
+    if (!mapa) iniciarMapa();
+
+    L.marker([lat, lng])
+        .addTo(camadaMarcadores)
+        .bindPopup(nome)
+        .openPopup();
+
+    mapa.setView([lat, lng], 15);
+});
 async function carregarLista() {
     const itens = await listarLocais();
     listaEl.innerHTML = "";
@@ -71,10 +75,8 @@ async function carregarLista() {
     camadaMarcadores.clearLayers();
 
     itens.forEach(i => {
-        // Lista
         const li = document.createElement("li");
         li.textContent = `${i.nome} (${i.lat.toFixed(6)}, ${i.lng.toFixed(6)})`;
-
         const btnExcluir = document.createElement("button");
         btnExcluir.textContent = "Excluir";
         btnExcluir.onclick = async () => {
@@ -84,8 +86,6 @@ async function carregarLista() {
 
         li.appendChild(btnExcluir);
         listaEl.appendChild(li);
-
-        // Marcador no mapa
         L.marker([i.lat, i.lng])
             .addTo(camadaMarcadores)
             .bindPopup(i.nome);
@@ -93,10 +93,6 @@ async function carregarLista() {
 }
 
 carregarLista();
-
-// ==============================
-// Registrar Service Worker
-// ==============================
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js");
 }
