@@ -46,10 +46,8 @@ export async function removerLocal(id) {
     return new Promise((resolve, reject) => {
         const tx = db.transaction(STORE_NAME, "readwrite");
         const store = tx.objectStore(STORE_NAME);
-
         const request = store.delete(id);
-
-        request.onsuccess = () => resolve(true);
+     request.onsuccess = () => resolve(true);
         request.onerror = () => reject(request.error);
     });
 }

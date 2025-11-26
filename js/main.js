@@ -21,17 +21,13 @@ function iniciarMapa() {
 const sucesso = (pos) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
-
     latInput.value = lat.toFixed(6);
     lngInput.value = lng.toFixed(6);
-
     camadaMarcadores.clearLayers();
     L.marker([lat, lng]).addTo(camadaMarcadores).bindPopup("Você está aqui").openPopup();
     mapa.setView([lat, lng], 15);
 };
-
 const erro = () => alert("Erro ao capturar localização");
-
 btnCapturar.addEventListener("click", () => {
     if (!navigator.geolocation) return alert("Navegador não suporta geolocalização.");
     navigator.geolocation.getCurrentPosition(sucesso, erro);
@@ -57,9 +53,7 @@ btnAdicionar.addEventListener("click", () => {
         alert("Informe latitude e longitude válidas.");
         return;
     }
-
     if (!mapa) iniciarMapa();
-
     L.marker([lat, lng])
         .addTo(camadaMarcadores)
         .bindPopup(nome)
@@ -91,7 +85,6 @@ async function carregarLista() {
             .bindPopup(i.nome);
     });
 }
-
 carregarLista();
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js");
