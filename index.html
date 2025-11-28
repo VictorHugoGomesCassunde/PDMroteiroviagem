@@ -4,10 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Título da PWA -->
     <title>Roteiro de Viagem - GeoPWA</title>
 
+    <!-- CSS principal da aplicação -->
     <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Arquivo de configuração da PWA -->
     <link rel="manifest" href="./manifest.json">
+
+    <!-- CSS e JS do Leaflet (biblioteca do mapa) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -15,9 +21,10 @@
 <body>
 <div class="container">
 
+    <!-- Título principal -->
     <h1>Roteiro de Viagem</h1>
 
-    
+    <!-- Área do formulário -->
     <div class="card">
         <label>Nome:</label>
         <input id="nome" type="text">
@@ -28,21 +35,26 @@
         <label>Longitude:</label>
         <input id="lng" type="text">
 
+        <!-- Botões de ações -->
         <button id="btnCapturar">Capturar Localização</button>
         <button id="btnSalvar">Salvar Local</button>
         <button id="btnAdicionar">Adicionar no mapa</button>
     </div>
 
-    
+    <!-- Lista e mapa dos locais salvos -->
     <div class="card">
         <h2>Locais salvos</h2>
+
+        <!-- Lista gerada dinamicamente -->
         <ul id="lista"></ul>
 
+        <!-- Área onde o mapa Leaflet será carregado -->
         <div id="mapa"></div>
     </div>
 
 </div>
 
+<!-- Importa o JavaScript principal -->
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>
